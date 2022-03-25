@@ -1,0 +1,70 @@
+<hr />
+
+<form [formGroup]="miFormulario" (ngSubmit)="guardar()">
+  <div class="row mb-5">
+    <div class="col">
+      <mat-form-field appearance="fill">
+        <mat-label>Continente</mat-label>
+        <mat-select formControlName="continente">
+          <mat-option [value]="null">None</mat-option>
+          <div *ngFor="let continente of continentes">
+            <mat-option [value]="continente">{{ continente }}</mat-option>
+          </div>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row mb-5" *ngIf="!paisesArr">
+    <div class="col">
+      <mat-form-field appearance="fill">
+        <mat-label>Pais</mat-label>
+        <mat-select formControlName="pais">
+          <mat-option [value]="null">None</mat-option>
+          <div *ngFor="let pais of paisesArr">
+            <mat-option [value]="pais.cca2">{{ pais.name.common }}</mat-option>
+          </div>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row mb-5" *ngIf="!fronterasArr">
+    <div class="col">
+      <mat-form-field appearance="fill">
+        <mat-label>Paises Vecinos</mat-label>
+        <mat-select formControlName="frontera">
+          <mat-option [value]="null">None</mat-option>
+          <div *ngFor="let frontera of fronterasArr">
+            <mat-option [value]="frontera">{{ frontera }}</mat-option>
+          </div>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="row">
+        <div class="col-3">
+          <button class="float-end" mat-raised-button color="primary">
+            Primary
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col" *ngIf="cargando">
+    <div class="row">
+      <div class="alert-info">Cargando...</div>
+    </div>
+  </div>
+</form>
+
+<div>
+  <div class="row">
+    <div class="col">
+      <h2>JSON</h2>
+      <pre>
+      {{ miFormulario.value | json }}
+      </pre>
+    </div>
+  </div>
+</div>
